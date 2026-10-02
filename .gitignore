@@ -1,0 +1,10 @@
+# dependencies and build output - regenerate with `npm install` / `npm run build`
+node_modules/
+dist/
+*.tsbuildinfo
+
+# runtime data (member XP) - never commit this
+levels.json
+
+# secrets
+.env
