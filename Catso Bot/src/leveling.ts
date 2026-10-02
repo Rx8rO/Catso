@@ -1,5 +1,6 @@
 import { trackMessage } from "./moderation";
 import { findUserMention } from "./ids";
+import { containsBlockedWord } from "./autorole";
 import fs from "fs";
 import path from "path";
 import {
@@ -112,6 +113,9 @@ async function onLevelingMessage(evt: ChannelMessageCreatedEvent): Promise<void>
 
     // Ignore command triggers from awarding XP
     if (text.startsWith("!")) return;
+
+    // Messages the word filter removes must not earn XP
+    if (containsBlockedWord(text)) return;
 
     // 2. Process XP Gain
     await processXpGain(evt, userId as any);
